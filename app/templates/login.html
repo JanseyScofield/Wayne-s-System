@@ -3,18 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
     <title>Login</title>
 </head>
 <body>
     <main>
-        <h1>Wayne's</h1>
-        <section  id="secao-login">
-            <h2>Login</h2>
-            <div>
-                <label for="usuario">Usuário</label>
-                <input type="text" id="usuario" name="usuario">
-                <label for="senha">Senha</label>
-                <input type="text" id="senha" name="senha">
+        <h1 class="titulos-principais">Wayne's</h1>
+        <section id="secao-login">
+            <h2 id="titulo-login">Login</h2>
+            <div id="div-login">
+                <div class="campo">
+                    <label class = 'label-login' for="usuario">Usuário</label>
+                    <input type="text" id="usuario" name="usuario">
+                </div>
+                <div class="campo">
+                    <label class = 'label-login' for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha">
+                </div>
                 <button class='botao' type="submit">Entrar</button>
             </div>
         </section>
