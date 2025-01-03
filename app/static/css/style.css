@@ -113,3 +113,31 @@ input {
     color: var(--cinza-100);
     background-color: var(--preto-900);
 }
+
+#campo-senha {
+    position: relative;
+}
+  
+#campo-senha input {
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 16px;
+}
+  
+#campo-senha #mostar-senha {
+    position: absolute;
+    top: 65%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #666;
+  }
+  
+#campo-senha #mostar-senha:hover {
+    color: #333;
+}
+  

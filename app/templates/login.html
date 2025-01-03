@@ -16,13 +16,26 @@
                     <label class = 'label-login' for="usuario">Usuário</label>
                     <input type="text" id="usuario" name="usuario">
                 </div>
-                <div class="campo">
+                <div class="campo" id="campo-senha">
                     <label class = 'label-login' for="senha">Senha</label>
                     <input type="password" id="senha" name="senha">
+                    <span id="mostar-senha" onclick="mostrarSenha()">&#128065</span>
                 </div>
                 <button class='botao' type="submit">Entrar</button>
             </div>
         </section>
     </main>
 </body>
+<script>
+const inputSenha = document.getElementById('senha');
+
+function mostrarSenha(){
+    if(inputSenha.type === 'password'){
+        inputSenha.type = 'text';
+    }
+    else{
+        inputSenha.type = 'password';
+    }
+}
+</script>
 </html>
