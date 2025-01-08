@@ -11,6 +11,9 @@ class Usuario(db.Model):
     permisao_mansao = db.Column(db.Integer, nullable = False)
     permisao_industria = db.Column(db.Integer, nullable = False)
     permisao_batcaverna = db.Column(db.Integer, nullable = False)
+    permisao_registrar = db.Column(db.Integer, nullable = False)
+    permisao_editar = db.Column(db.Integer, nullable = False)
+    permisao_deletar = db.Column(db.Integer, nullable = False)
 
 class Funcao(db.Model):
     id = db.Column(db.Integer, primary_key = True)
