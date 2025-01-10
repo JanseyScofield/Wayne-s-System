@@ -8,6 +8,8 @@
     --preto-200: #121212;
     --preto-900:#000000;
     --cinza-100:#A1A1A1;
+    --cinza-700:#333333;
+    --cinza-800:#202020;
     --cinza-900:#2A2A2A;
     --cinza-800:#333333;
     --azul-900: #1B3A5F;
@@ -17,20 +19,20 @@
 
 @font-face {
     font-family: 'BatmanForever';
-    src: url('../../assets/fonts/batmfo__.ttf') format('truetype');
+    src: url('../assets/fonts/Inter_18pt-Regular.ttf') format('truetype');
 }
   
 body {
     font-family: 'BatmanForever', sans-serif;
     background-color: var(--preto-900);
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.3);
     color: var(--cinza-100);
     height: 100vh; 
-    margin: 0;display: flex;
-    justify-content: center;
-    align-items: center;
+    margin: 0;
+    height: 100vh;
 }
 
-main {
+#container-login{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,11 +41,16 @@ main {
     width: 100%;              
 }
 
-.titulos-principais{
+.titulos-principais {
     text-align: center;
     font-size: 6rem;
     margin-bottom: 5rem;
+    color: var(--cinza-100); 
+    transform: perspective(500px) translateZ(30px); 
+    text-shadow: 0 5px 10px rgba(0, 0, 0, 0.3), 
+                 0 10px 20px rgba(0, 0, 0, 0.2); 
 }
+
 
 #secao-login {
     background-color: var(--azul-900);
@@ -140,4 +147,34 @@ input {
 #campo-senha #mostar-senha:hover {
     color: #333;
 }
-  
+
+nav{
+    display: flex;
+    justify-content: center;
+}
+
+#container-modulos{
+    display:flex;
+    justify-content: space-around;
+}
+
+.modulos{
+    text-align: center;
+    text-decoration: none;
+    color: var(--cinza-100);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modulos:hover{
+    transform: scale(1.1); /* Aumenta o tamanho em 10% */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.imagens-modulos{
+    height: 40rem;
+    width: 30rem;
+    max-width: 75%;
+    max-height: 50%;
+    border: 5px solid #1B3A5F;
+    border-radius: 10%;
+}
