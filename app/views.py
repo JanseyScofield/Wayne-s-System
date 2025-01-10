@@ -33,10 +33,33 @@ def home():
     if not session:
         return redirect(url_for('tela_login'))
     context = {
+        'nome' : session['usuario_logado']['nome']
+    }
+
+    return render_template('home.html', context=context)
+
+@app.route('/funcionarios', methods = ['GET'])
+def funcionarios():
+    if not session:
+        return redirect(url_for('tela_login'))
+    context = {
         'nome' : session['usuario_logado']['nome'],
         'permisao_registrar' : session['usuario_logado']['registrar'],
         'permisao_editar' : session['usuario_logado']['editar'],
         'permisao_deletar' : session['usuario_logado']['deletar']
     }
 
-    return render_template('home.html', context=context)
+    return render_template('modulo_funcionarios.html', context=context)
+
+@app.route('/inventario', methods = ['GET'])
+def inventario():
+    if not session:
+        return redirect(url_for('tela_login'))
+    context = {
+        'nome' : session['usuario_logado']['nome'],
+        'permisao_registrar' : session['usuario_logado']['registrar'],
+        'permisao_editar' : session['usuario_logado']['editar'],
+        'permisao_deletar' : session['usuario_logado']['deletar']
+    }
+
+    return render_template('modulo_inventario.html', context=context)

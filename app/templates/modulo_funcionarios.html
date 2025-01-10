@@ -6,42 +6,40 @@
     <link rel="stylesheet" href="../static/css/style.css">
     <title>Funcionários</title>
 </head>
-<body>
+<body>   
+    <nav>
+        <h1 class="titulos-principais">Funcionários</h1>
+    </nav>
     <main>
-        <nav>
-            <h1 class="titulos-principais">Funcionários</h1>
-        </nav>
-        <body>
-            <section id="secao-registrar-empregado">
-                <img id= "icone-perfil" src="" alt="Ícone perfil">
-                {%if context.permisao_registrar == 1%}
-                    <a id="ancora-registrar" href="#">Registrar Funcionário</a>
-                {%endif%}
-            </section>
-            <section id="funcionalidades-empregados">
+        <section id="secao-registrar-empregado">
+            <img id= "icone-perfil" src="" alt="Ícone perfil">
+            {%if context.permisao_registrar == 1%}
+                <a id="ancora-registrar" href="#">Registrar Funcionário</a>
+            {%endif%}
+        </section>
+        <section id="funcionalidades-empregados">
+            <div class="linha-funcionalidade">
+                <a href="#">Visualizar Empregados</a>
+                <p>></p>
+            </div>
+            <div class="linha-funcionalidade">
+                <a href="#">Visualizar Empregado</a>
+                <p>></p>
+            </div>
+            {%if context.permisao_editar == 1%}
                 <div class="linha-funcionalidade">
-                    <a href="#">Visualizar Empregados</a>
+                    <a href="#">Editar Empregado</a>
                     <p>></p>
                 </div>
+            {%endif%}
+            {%if context.permisao_deletar == 1%}
                 <div class="linha-funcionalidade">
-                    <a href="#">Visualizar Empregado</a>
+                    <a href="#">Remover Empregado</a>
                     <p>></p>
                 </div>
-                {%if context.permisao_editar == 1%}
-                    <div class="linha-funcionalidade">
-                        <a href="#">Editar Empregado</a>
-                        <p>></p>
-                    </div>
-                {%endif%}
-                {%if context.permisao_deletar == 1%}
-                    <div class="linha-funcionalidade">
-                        <a href="#">Remover Empregado</a>
-                        <p>></p>
-                    </div>
-                {%endif%}
-                <button class="botao" type="button" hr>Sair</button>
-            </section>
-        </body>
-    </main>
+            {%endif%}
+            <button class="botao" type="button" hr>Sair</button>
+        </section>
+    </main>  
 </body>
 </html>
