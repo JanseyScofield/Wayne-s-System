@@ -10,30 +10,30 @@
     <nav>
         <h1 class="titulos-principais">Funcionários</h1>
     </nav>
-    <main>
+    <main id="main-funcionarios">
         <section id="secao-registrar-empregado">
-            <img id= "icone-perfil" src="" alt="Ícone perfil">
+            <img class="imagem-padrao imagem-icone" src="../static/assets/images/icone-registrar-usuário.jpg" alt="Ícone perfil">
             {%if context.permisao_registrar == 1%}
-                <a id="ancora-registrar" href="#">Registrar Funcionário</a>
+                <button class="botao" type="button">Registrar Funcionário</button>
             {%endif%}
         </section>
         <section id="funcionalidades-empregados">
-            <div class="linha-funcionalidade">
+            <div class="linha-funcionalidade-funcionarios">
                 <a href="#">Visualizar Empregados</a>
                 <p>></p>
             </div>
-            <div class="linha-funcionalidade">
+            <div class="linha-funcionalidade-funcionarios">
                 <a href="#">Visualizar Empregado</a>
                 <p>></p>
             </div>
             {%if context.permisao_editar == 1%}
-                <div class="linha-funcionalidade">
+                <div class="linha-funcionalidade-funcionarios">
                     <a href="#">Editar Empregado</a>
                     <p>></p>
                 </div>
             {%endif%}
             {%if context.permisao_deletar == 1%}
-                <div class="linha-funcionalidade">
+                <div class="linha-funcionalidade-funcionarios">
                     <a href="#">Remover Empregado</a>
                     <p>></p>
                 </div>
