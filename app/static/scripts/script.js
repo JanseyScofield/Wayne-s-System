@@ -9,14 +9,3 @@ function mostrarSenha(){
         inputSenha.type = 'password';
     }
 }
-
-function redirecionarModulo(modulo){
-    fetch(urlPagina +  modulo)
-    .then(response =>{
-        if(response.ok){
-            window.location.href = urlPagina +  modulo;
-        }
-    }).catch(error =>{
-        throw new Error("Erro ao acessar a página.");
-    });
-}
