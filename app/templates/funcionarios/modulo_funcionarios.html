@@ -14,31 +14,31 @@
         <section id="secao-registrar-empregado">
             <img class="imagem-padrao imagem-icone" src="../static/assets/images/icone-registrar-usuário.jpg" alt="Ícone perfil">
             {%if context.permisao_registrar == 1%}
-                <button class="botao" type="button">Registrar Funcionário</button>
+                <a class="botao ancora-botao" href="/funcionarios/registrar">Registrar Funcionário</a>
             {%endif%}
         </section>
         <section id="funcionalidades-empregados">
             <div class="linha-funcionalidade-funcionarios">
-                <a href="#">Visualizar Empregados</a>
+                <a href="/funcionarios/visualizar">Visualizar Funcionários</a>
                 <p>></p>
             </div>
             <div class="linha-funcionalidade-funcionarios">
-                <a href="#">Visualizar Empregado</a>
+                <a href="/funcionarios/visualizar">Visualizar Funcionário Específico</a>
                 <p>></p>
             </div>
             {%if context.permisao_editar == 1%}
                 <div class="linha-funcionalidade-funcionarios">
-                    <a href="#">Editar Empregado</a>
+                    <a href="/funcionarios/editar">Editar Funcionário</a>
                     <p>></p>
                 </div>
             {%endif%}
             {%if context.permisao_deletar == 1%}
                 <div class="linha-funcionalidade-funcionarios">
-                    <a href="#">Remover Empregado</a>
+                    <a href="/funcionarios/remover">Remover Funcionário</a>
                     <p>></p>
                 </div>
             {%endif%}
-            <button class="botao" type="button" hr>Sair</button>
+            <a class="botao ancora-botao" href="/home" type="button" hr>Sair</a>
         </section>
     </main>  
 </body>

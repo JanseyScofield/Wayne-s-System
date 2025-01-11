@@ -43,7 +43,7 @@ body {
 
 .titulos-principais {
     text-align: center;
-    font-size: 6rem;
+    font-size: 4rem;
     margin-top: 2rem;
     margin-bottom: 5rem;
     color: var(--cinza-100); 
@@ -120,6 +120,12 @@ input {
     width: 12rem;
     color: var(--cinza-100);
     background-color: var(--preto-900);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.botao:hover{
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #campo-senha {
@@ -230,4 +236,12 @@ nav{
 .linha-funcionalidade-funcionarios:hover{
     transform: scale(1.01);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ancora-botao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: 1px solid var(--cinza-100);
 }
