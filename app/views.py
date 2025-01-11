@@ -16,9 +16,6 @@ def tela_login():
                     'id' : usuario.id,
                     'nome' : usuario.nome,
                     'funcao' : usuario.id_funcao,
-                    'mansao' : usuario.permisao_mansao,
-                    'industira' : usuario.permisao_industria,
-                    'batcaverna' : usuario.permisao_batcaverna,
                     'registrar' : usuario.permisao_registrar,
                     'editar' : usuario.permisao_editar,
                     'deletar' : usuario.permisao_deletar
