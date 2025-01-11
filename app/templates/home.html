@@ -21,19 +21,5 @@
         </a>        
     </main>
 </body>
-<script>
-    const urlPagina = 'http://127.0.0.1:5000/';
-
-    function redirecionarModulo(modulo){
-        fetch(urlPagina +  modulo)
-        .then(response =>{
-            if(response.ok){
-                window.location.href = urlPagina +  modulo;
-            }
-        }).catch(error =>{
-            throw new Error("Erro ao acessar a página.");
-        });
-    }
-
-</script>
+<script src="../static/scripts/script.js"></script>
 </html>
