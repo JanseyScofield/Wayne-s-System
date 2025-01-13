@@ -10,5 +10,37 @@
     <nav>
         <h1 class="titulos-principais">Registrar Funcionário</h1>
     </nav>
+    <main>
+        <form action="" class="formulario-padrao" method="POST">
+            <div class="campo-form-padrao">
+                <label for="nome-funcionario">Digite o nome do funcionário:</label>
+                <input type="text" name="nome-funcionario" id="nome-funcionario">
+            </div>
+            <div class="campo-form-padrao">
+                <label for="funcao-funcionario">Escolha a função do funcionário:</label>
+                <select name="funcao-funcionario" id="dropdown-funcionario">
+                    <option value="funcionario-comum">Funcionário Comum</option>
+                    <option value="administrador-seguranca">Administrador de Segurança</option>
+                    <option value="gerente">Gerente</option>
+                </select>
+            </div>
+            <div class="campo-form-padrao campo-checkbox">
+                <h3 class="titulo-checkbox">Permisão do funcionário</h3>
+                <label for="permisao-registrar">
+                    <input type="checkbox" name="permisao-registrar"  value="0">
+                    Registrar Itens e funcionários
+                </label>
+                <label for="permisao-editar">
+                    <input type="checkbox" name="permisao-editar" value="0">
+                    Editar Itens e funcionários
+                </label>
+                <label for="permisao-deletar">
+                    <input type="checkbox" name="permisao-deletar" value="0">
+                    Deletar Itens e funcionários
+                </label>
+            </div>
+            <button type="submit" class="botao">Cadastrar</button>
+        </form>
+    </main>
 </body>
 </html>
