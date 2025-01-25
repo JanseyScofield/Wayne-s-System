@@ -11,4 +11,4 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 from app.views import tela_login
-from app.models import Usuario
+from app.models import Usuario, Funcao, Item, CategoriasItens
