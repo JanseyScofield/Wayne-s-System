@@ -159,6 +159,12 @@ nav{
     justify-content: center;
 }
 
+#main-modulos{
+    display : flex; 
+    flex-direction: column; 
+    align-items: center;
+}
+
 #container-modulos{
     display:flex;
     justify-content: space-around;
