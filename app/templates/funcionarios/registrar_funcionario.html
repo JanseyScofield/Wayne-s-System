@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Registrar Funcionário</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
         <h1 class="titulos-principais">Registrar Funcionário</h1>
     </nav>
     <main class="main-form">
-        <form action="" class="formulario-padrao" method="POST">
+        <form action="/funcionarios/registrar" class="formulario-padrao" method="POST">
             <section class="campos-form">
                 <div class="campo-form-padrao">
                     <label for="nome-funcionario">Digite o nome do funcionário:</label>
@@ -47,7 +48,39 @@
                 <button type="submit" class="botao">Cadastrar</button>
                 <a class="botao ancora-botao" href="/funcionarios" type="button" hr>Sair</a>
             </div>
-        </form>
+        </form> 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'erro'%}
+                        <script>
+                            Swal.fire({
+                                title: 'Erro ao cadastrar o usuário!',
+                                text: '{{ message }}',
+                                icon: 'error',  // Ícone de erro
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#9B1C1C', // Cor do botão
+                                background: '#1B3A5F',        // Cor de fundo do modal
+                                color: '#A1A1A1', 
+                            });
+                        </script>
+                    {% endif %}
+                    {% if category == 'sucesso'%}
+                        <script>
+                            Swal.fire({
+                                title: 'Usuário Cadastrado com Sucesso!',
+                                text: '{{ message }}',
+                                icon: 'success',  // Ícone de erro
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#198754', // Cor do botão
+                                background: '#1B3A5F',        // Cor de fundo do modal
+                                color: '#A1A1A1', 
+                            });
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
     </main>
 </body>
 </html>

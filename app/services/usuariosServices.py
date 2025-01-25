@@ -1,4 +1,4 @@
-from app.models import Usuario, db
+from app.models import db, Usuario
 import bcrypt
 from random import randint
 
@@ -16,7 +16,7 @@ def gerar_senha(nome : str, funcao : str):
 def encriptografar_senha(senha : str):
     salt = bcrypt.gensalt()
     senha_hash = bcrypt.hashpw(senha.encode(), salt)
-    return senha_hash
+    return senha_hash.decode('utf-8')
 
 def buscar_usuario_nome_usuario(nome : str):
     return Usuario.query.filter_by(nome_usuario=nome).first()
@@ -26,7 +26,7 @@ def buscar_usuario_nome(nome_completo : str):
 
 def cadastrar_usuario(nome : str, nome_usuario : str, funcao : str, senha_gerada : str, permisao_cadastrar : int, permisao_editar : int, permisao_deletar : int):
     senha_encriptografada = encriptografar_senha(senha_gerada)
-    id_funcao
+    id_funcao = None
     if funcao == 'administrador-seguranca':
         id_funcao = 2
     elif funcao == 'gerente':
@@ -34,18 +34,19 @@ def cadastrar_usuario(nome : str, nome_usuario : str, funcao : str, senha_gerada
     else:
         id_funcao = 4
 
-    novo_usuario = Usuario(nome=nome, 
-                           nome_usuario=nome_usuario, 
-                           senha=senha_encriptografada, 
-                           id_funcao=id_funcao,
-                           permisao_registar=permisao_cadastrar, 
-                           permisao_editar=permisao_editar,
-                           permisao_deletar=permisao_deletar)
     try:
+        novo_usuario = Usuario(nome=nome, 
+                            nome_usuario=nome_usuario, 
+                            senha=senha_encriptografada, 
+                            id_funcao=id_funcao,
+                            permisao_registrar=permisao_cadastrar, 
+                            permisao_editar=permisao_editar,
+                            permisao_deletar=permisao_deletar)
         db.session.add(novo_usuario)
         db.session.commit()
     except Exception as e:
         db.session.rollback()
+        print(str(e))
         return f"Erro ao cadastrar usuário: {str(e)}"
     
 # Código para comparar senhas criptografadas : bcrypt.checkpw(senha.encode(), senha_hash_armazenada)
