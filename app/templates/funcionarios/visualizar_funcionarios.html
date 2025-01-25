@@ -10,5 +10,69 @@
     <nav>
         <h1 class="titulos-principais">Dashboard Funcionários</h1>
     </nav>
+    <main>
+        <section class="container-tabelas">
+            <table class="tabelas">
+                <caption class="textos-tabelas">Quantidade de Funcionários: {{qtd_funcionarios}}</caption>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Função</th>
+                        <th>Data de Criação</th>
+                        <th>Permissão de Registrar</th>
+                        <th>Permissão de Editar</th>
+                        <th>Permissão de Deletar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                        <tr>
+                            <td>{{ usuario.nome }}</td>
+                            <td>
+                                {% if usuario.id_funcao ==  1%}
+                                    Administrador
+                                {% elif usuario.id_funcao ==  2%}
+                                    Administrador de Segurança
+                                {% elif usuario.id_funcao ==  3%}
+                                    Gerente
+                                {%else%}
+                                    Funcionário
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if usuario.data_criacao%}
+                                    {{ usuario.data_criacao.strftime('%d/%m/%Y')}}
+                                {% else %}
+                                    Não disponível
+                                {% endif %}
+                                </td>
+                            <td>
+                                {% if usuario.permisao_registrar == 1%}
+                                    Sim
+                                {% else %}
+                                    Não
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if usuario.permisao_editar == 1%}
+                                    Sim
+                                {% else %}
+                                    Não
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if usuario.permisao_deletar == 1%}
+                                    Sim
+                                {% else %}
+                                    Não
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a class="botao ancora-botao" href="/funcionarios" type="button" style="margin-bottom: 20px;">Sair</a>
+        </section>
+    </main>
 </body>
 </html>

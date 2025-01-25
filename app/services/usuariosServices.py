@@ -49,4 +49,4 @@ def cadastrar_usuario(nome : str, nome_usuario : str, funcao : str, senha_gerada
         print(str(e))
         return f"Erro ao cadastrar usuário: {str(e)}"
     
-# Código para comparar senhas criptografadas : bcrypt.checkpw(senha.encode(), senha_hash_armazenada)
+

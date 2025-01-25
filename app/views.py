@@ -58,12 +58,16 @@ def registrar_funcionario():
     if request.method == "GET":
         return render_template('funcionarios/registrar_funcionario.html')
     if request.method == "POST":
+        if request.form.get('nome-funcionario') == '':
+            erro = 'Digite um nome para o novo usuário.'
+            flash(erro, 'erro')
+            return redirect(url_for('registrar_funcionario'))
         funcionario = usuariosServices.buscar_usuario_nome(request.form.get('nome-funcionario'))
         if funcionario:
             erro = 'Já existe funcionário com esse nome.'
             flash(erro, 'erro')
             return redirect(url_for('registrar_funcionario'))
-
+    
         nome_usuario = usuariosServices.gerar_nome_usuario(request.form.get('nome-funcionario'))
         senha_gerada = usuariosServices.gerar_senha(request.form.get('nome-funcionario'), request.form.get('funcao-funcionario'))
 
@@ -105,7 +109,8 @@ def registrar_funcionario():
 def visualizar_funcionario():
     if not session:
         return redirect(url_for('tela_login'))
-    return render_template('funcionarios/visualizar_funcionarios.html')
+    usuarios =  Usuario.query.all()
+    return render_template('funcionarios/visualizar_funcionarios.html', usuarios=usuarios, qtd_funcionarios=len(usuarios))
 
 @app.route('/funcionarios/remover', methods = ['GET'])
 def remover_funcionario():

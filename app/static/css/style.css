@@ -337,3 +337,33 @@ input[type="checkbox"]:checked {
     display: flex;
     gap: 2rem;
 }
+
+.container-tabelas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.tabelas {
+    background-color: var(--azul-900);
+    color: var(--cinza-100);
+    border-collapse: collapse;
+    width: 70%;
+    border: 5px solid var(--cinza-100);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2); 
+    margin: 20px auto; 
+    border-radius: 8px;
+}
+
+th, td{
+    padding: 5px; 
+    text-align: center;
+}
+
+.textos-tabelas{
+    font-size: 1.5rem;
+    color: var(--cinza-100); 
+    text-align: left;
+    margin-bottom: 5px;
+}
