@@ -4,11 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Editar Funcionário</title>
 </head>
 <body>
     <nav>
         <h1 class="titulos-principais">Editar Funcionário</h1>
     </nav>
+    <main>
+        <section class="container-editar">
+            <form action="/funcionarios/buscar" class="formulario-padrao" style='margin-bottom: 20px;' method="POST">
+                <section class="campos-form">
+                    <div class="campo-form-padrao">
+                        <label for="nome-funcionario">Digite o nome do funcionário:</label>
+                        <input type="text" name="nome-funcionario" id="nome-funcionario">
+                    </div> 
+                </section>
+                <div class="botoes-formulario">
+                    <button type="submit" class="botao">Buscar</button>
+                    <a class="botao ancora-botao" href="/funcionarios" type="button" hr>Sair</a>
+                </div>
+            </form> 
+            {% if funcionario %}
+            <p class="textos-tabelas" style="color: #A1A1A1; margin-bottom: 10px;">Editar os dados de {{funcionario.nome}}</p>
+            <form action="/funcionarios/editar" class="formulario-padrao" method="POST">
+                    <input type="hidden" name="funcionario-id" value="{{ funcionario.id }}">
+                        <div class="campo-form-padrao">
+                            <label for="funcao-funcionario">Escolha a nova função do funcionário:</label>
+                            <select name="funcao-funcionario" id="dropdown-funcionario">
+                                <option value="funcionario-comum">Funcionário Comum</option>
+                                <option value="administrador-seguranca">Administrador de Segurança</option>
+                                <option value="gerente">Gerente</option>
+                            </select>
+                        </div>
+                        <div class="campo-form-padrao campo-checkbox">
+                            <h3 class="titulo-checkbox">Permissões</h3>
+                            <div class="opcoes-checkbox">
+                                <label for="permisao-registrar">
+                                    Registrar Itens e funcionários
+                                    <input type="checkbox" name="permisao-registrar"  value="0">
+                                </label>
+                                <label for="permisao-editar">
+                                    Editar Itens e funcionários
+                                    <input type="checkbox" name="permisao-editar" value="0">
+                                </label>
+                                <label for="permisao-deletar">
+                                    Deletar Itens e funcionários
+                                    <input type="checkbox" name="permisao-deletar" value="0">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="botoes-formulario">
+                            <button type="submit" class="botao">Editar</button>
+                            <a class="botao ancora-botao" href="/funcionarios" type="button" hr>Sair</a>
+                        </div>
+                </form> 
+            {% endif %}
+        </section>
+    </main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'erro'%}
+                        <script>
+                            Swal.fire({
+                                title: 'Erro!',
+                                text: '{{ message }}',
+                                icon: 'error',  // Ícone de erro
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#9B1C1C', // Cor do botão
+                                background: '#1B3A5F',        // Cor de fundo do modal
+                                color: '#A1A1A1', 
+                            });
+                        </script>
+                    {% endif %}
+                    {% if category == 'sucesso'%}
+                        <script>
+                            Swal.fire({
+                                title: '{{ message }}',
+                                icon: 'success',  // Ícone de erro
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#198754', // Cor do botão
+                                background: '#1B3A5F',        // Cor de fundo do modal
+                                color: '#A1A1A1', 
+                            });
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 </body>
 </html>
