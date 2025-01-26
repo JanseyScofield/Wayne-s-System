@@ -9,7 +9,9 @@ import bcrypt
 def tela_login():
     erro = None
     session.clear()
-    # Usuario mestre atual : jansey.scofield  senha: @Janseyadministrador-seguranca696
+    # Usuario mestre atual codespace: jansey.scofield  senha: @Janseyadministrador-seguranca696
+    # Usuario mestre atual local: jansey.scofield  senha: @Janseyadministrador-seguranca298
+
     if request.method == 'POST':
         usuario = usuariosServices.buscar_usuario_nome_usuario(request.form.get('usuario'))
         if usuario:
@@ -112,17 +114,80 @@ def visualizar_funcionario():
     usuarios =  Usuario.query.all()
     return render_template('funcionarios/visualizar_funcionarios.html', usuarios=usuarios, qtd_funcionarios=len(usuarios))
 
-@app.route('/funcionarios/remover', methods = ['GET'])
+@app.route('/funcionarios/apagar', methods = ['GET', 'POST'])
 def remover_funcionario():
     if not session:
         return redirect(url_for('tela_login'))
-    return render_template('funcionarios/apagar_funcionario.html')
+    if request.method == 'GET':
+        return render_template('funcionarios/apagar_funcionario.html')
+    if request.method == 'POST':
+        if request.form.get('nome-funcionario') == '':
+            flash('Digite o nome de um funcionário.', 'erro')
+            return redirect(url_for('remover_funcionario'))
+        funcionario = usuariosServices.buscar_usuario_nome(request.form.get('nome-funcionario'))
+        if request.form.get('nome-funcionario') == session['usuario_logado']['nome']:
+            flash('Você não pode se apagar do sistema!', 'erro')
+            return redirect(url_for('remover_funcionario'))
+        if funcionario:
+            try:
+                usuariosServices.apagar_usuario(funcionario)
+                flash('Funcionário apagado com sucesso!', 'sucesso')
+                return redirect(url_for('remover_funcionario'))
+            except Exception as e:
+                flash(str(e), 'erro')
+                return redirect(url_for('remover_funcionario'))
+        else:
+            flash('Funcionário não encontrado. Digite outro.', 'erro')
+            return redirect(url_for('remover_funcionario'))
+        
 
-@app.route('/funcionarios/editar', methods = ['GET'])
-def editar_funcionario():
+
+@app.route('/funcionarios/buscar', methods=['GET','POST'])
+def buscar_funcionario():
     if not session:
         return redirect(url_for('tela_login'))
-    return render_template('funcionarios/editar_funcionario.html')
+    if request.method ==  'GET':
+        return render_template('funcionarios/editar_funcionario.html')
+    nome_funcionario = request.form.get('nome-funcionario')
+    if not nome_funcionario:
+        flash('Por favor, digite o nome do funcionário.', 'erro')
+        return redirect(url_for('buscar_funcionario'))
+
+    funcionario = usuariosServices.buscar_usuario_nome(nome_funcionario)
+    if funcionario:
+        return render_template('funcionarios/editar_funcionario.html', funcionario=funcionario)
+    else:
+        flash('Funcionário não encontrado. Digite outro nome.', 'erro')
+        return redirect(url_for('buscar_funcionario'))
+
+
+@app.route('/funcionarios/editar', methods=['POST'])
+def editar_funcionario():
+    funcionario_id = request.form.get('funcionario-id')
+    if not funcionario_id:
+        flash('Erro ao identificar o funcionário.', 'erro')
+        return redirect(url_for('editar_funcionario'))
+    
+    funcao_funcionario = request.form.get('funcao-funcionario')
+    permisao_registrar = 1 if request.form.get('permisao-registrar') else 0
+    permisao_editar = 1 if request.form.get('permisao-editar') else 0
+    permisao_deletar = 1 if request.form.get('permisao-deletar') else 0
+
+    try:
+        usuariosServices.atualizar_usuario(
+            funcionario_id,
+            funcao_funcionario,
+            permisao_registrar,
+            permisao_editar,
+            permisao_deletar
+        )
+        flash('Funcionário editado com sucesso!', 'sucesso')
+        return redirect(url_for('editar_funcionario'))
+    except Exception as e:
+        flash(f'Erro ao atualizar funcionário: {str(e)}', 'erro')
+        return redirect(url_for('editar_funcionario'))
+
+
 
 @app.route('/inventario', methods = ['GET'])
 def inventario():

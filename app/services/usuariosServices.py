@@ -2,6 +2,14 @@ from app.models import db, Usuario
 import bcrypt
 from random import randint
 
+def checar_funcao(funcao : int):
+    if funcao == 'administrador-seguranca':
+        return 2
+    elif funcao == 'gerente':
+        return 3
+    else:
+        return 4
+
 def gerar_nome_usuario(nome : str):
     lista_nomes = nome.split()
     nome_usuario = lista_nomes[0].lower()
@@ -26,13 +34,7 @@ def buscar_usuario_nome(nome_completo : str):
 
 def cadastrar_usuario(nome : str, nome_usuario : str, funcao : str, senha_gerada : str, permisao_cadastrar : int, permisao_editar : int, permisao_deletar : int):
     senha_encriptografada = encriptografar_senha(senha_gerada)
-    id_funcao = None
-    if funcao == 'administrador-seguranca':
-        id_funcao = 2
-    elif funcao == 'gerente':
-        id_funcao = 3
-    else:
-        id_funcao = 4
+    id_funcao = checar_funcao(funcao)
 
     try:
         novo_usuario = Usuario(nome=nome, 
@@ -49,4 +51,23 @@ def cadastrar_usuario(nome : str, nome_usuario : str, funcao : str, senha_gerada
         print(str(e))
         return f"Erro ao cadastrar usuário: {str(e)}"
     
-
+def atualizar_usuario(usuario : Usuario, funcao : str, permisao_cadastrar : int, permisao_editar : int, permisao_deletar : int):
+    try:
+        usuario.id_funcao = checar_funcao(funcao)
+        usuario.permisao_registrar = permisao_cadastrar
+        usuario.permisao_editar = permisao_editar
+        usuario.permisao_deletar = permisao_deletar
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+        return f"Erro ao editar usuário: {str(e)}"
+    
+def apagar_usuario(usuario : Usuario):
+    try:
+        db.session.delete(usuario)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+        return f"Erro ao apagar usuário: {str(e)}"

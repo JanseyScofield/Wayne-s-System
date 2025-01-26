@@ -367,3 +367,17 @@ th, td{
     text-align: left;
     margin-bottom: 5px;
 }
+
+.container-editar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-apagar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
