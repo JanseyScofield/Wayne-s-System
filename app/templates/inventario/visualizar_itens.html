@@ -16,6 +16,7 @@
                 <caption class="textos-tabelas">Quantidade de Itens Distintos: {{qtd_itens_distintos}}</caption>
                 <thead>
                     <tr>
+                        <th>Código</th>
                         <th>Nome</th>
                         <th>Categoria</th>
                         <th>Quantidade</th>
@@ -25,6 +26,7 @@
                 <tbody>
                     {% for item in itens %}
                         <tr>
+                            <td>{{item.id}}</td>
                             <td>{{ item.nome }}</td>
                             <td>
                                 {% if item.id_categoria ==  1%}

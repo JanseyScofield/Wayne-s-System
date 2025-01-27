@@ -24,4 +24,14 @@ def registrar_item(nome : str, categoria : str, descricao : str, quantidade : in
     except Exception as e:
         db.session.rollback()
         return f"Erro ao cadastrar item: {str(e)}"
-    
+
+def buscar_item_id(id : int):
+    return Item.query.filter_by(id=id)
+
+def apagar_item(item : Item):
+    try:
+        db.session.delete(item)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return f"Erro ao apagar item: {str(e)}"

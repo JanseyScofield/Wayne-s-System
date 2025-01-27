@@ -39,6 +39,8 @@ def home():
 
     return render_template('home.html', context=context)
 
+# Região dos endpoints de funcionários
+
 @app.route('/funcionarios', methods = ['GET'])
 def funcionarios():
     if not session:
@@ -141,7 +143,6 @@ def remover_funcionario():
             return redirect(url_for('remover_funcionario'))
         
 
-
 @app.route('/funcionarios/buscar', methods=['GET','POST'])
 def buscar_funcionario():
     if not session:
@@ -187,6 +188,9 @@ def editar_funcionario():
         flash(f'Erro ao atualizar funcionário: {str(e)}', 'erro')
         return redirect(url_for('editar_funcionario'))
 
+# Fim região funcionários
+
+# Região dos endpoints de iventário
 
 @app.route('/inventario', methods = ['GET'])
 def inventario():
@@ -234,3 +238,29 @@ def visualizar_itens():
     itens = Item.query.all()
     qtd_itens_distintos = len(itens)
     return render_template('inventario/visualizar_itens.html', itens=itens, qtd_itens_distintos=qtd_itens_distintos)
+
+@app.route('/inventario/apagar', methods = ['GET', 'POST'])
+def remover_item():
+    if not session:
+        return redirect(url_for('tela_login'))
+    if request.method == 'GET':
+        return render_template('inventario/apagar_item.html')
+    if request.method == 'POST':
+        if request.form.get('codigo-item') == '':
+            flash('Digite o código de um item.', 'erro')
+            return redirect(url_for('remover_item'))
+        
+        codigo_item = int(request.form.get('codigo-item'))
+        item = itensServices.buscar_item_id(codigo_item)
+        if item:
+            try:
+                itensServices.apagar_item(item)
+                flash('Item apagado com sucesso!', 'sucesso')
+                return redirect(url_for('remover_item'))
+            except Exception as e:
+                flash(str(e), 'erro')
+                return redirect(url_for('remover_item'))
+        else:
+            flash('Item não encontrado. Digite outro código.', 'erro')
+            return redirect(url_for('remover_item'))
+        
