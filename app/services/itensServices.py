@@ -26,7 +26,7 @@ def registrar_item(nome : str, categoria : str, descricao : str, quantidade : in
         return f"Erro ao cadastrar item: {str(e)}"
 
 def buscar_item_id(id : int):
-    return Item.query.filter_by(id=id)
+    return Item.query.filter_by(id=id).first()
 
 def apagar_item(item : Item):
     try:
