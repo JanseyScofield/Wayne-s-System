@@ -1,6 +1,6 @@
 from app import app
 from app import db
-from app.models import Usuario
+from app.models import Usuario, Item
 from app.services import usuariosServices, itensServices
 from flask import render_template, request, redirect, url_for, session, flash
 import bcrypt
@@ -199,14 +199,14 @@ def inventario():
         'permisao_deletar' : session['usuario_logado']['deletar']
     }
 
-    return render_template('iventario/modulo_inventario.html', context=context)
+    return render_template('inventario/modulo_inventario.html', context=context)
 
 @app.route('/inventario/registrar', methods = ['GET', 'POST'])
 def registrar_item():
     if not session:
         return redirect(url_for('tela_login'))
     if request.method == 'GET':
-        return render_template('iventario/registrar_item.html')
+        return render_template('inventario/registrar_item.html')
     if request.method == 'POST':
         if request.form.get('nome-item') == '':
             flash('Digite algum nome para o item.', 'erro')
@@ -226,3 +226,11 @@ def registrar_item():
         except Exception as e:
             flash(f'Erro ao cadastrar item: {str(e)}', 'erro')
             return redirect(url_for('registrar_item'))
+        
+@app.route('/inventario/visualizar', methods=['GET'])
+def visualizar_itens():
+    if not session:
+        return redirect(url_for('tela_login'))
+    itens = Item.query.all()
+    qtd_itens_distintos = len(itens)
+    return render_template('inventario/visualizar_itens.html', itens=itens, qtd_itens_distintos=qtd_itens_distintos)

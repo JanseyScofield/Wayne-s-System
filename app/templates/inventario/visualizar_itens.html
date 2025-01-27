@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pr-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <title>Visualizar Itens</title>
+</head>
+<body>
+    <nav>
+        <h1 class="titulos-principais">Dashboard Inventário</h1>
+    </nav>
+    <main>
+        <section class="container-tabelas">
+            <table class="tabelas">
+                <caption class="textos-tabelas">Quantidade de Itens Distintos: {{qtd_itens_distintos}}</caption>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in itens %}
+                        <tr>
+                            <td>{{ item.nome }}</td>
+                            <td>
+                                {% if item.id_categoria ==  1%}
+                                    Insumos Químicos
+                                {% elif item.id_categoria ==  2%}
+                                    Veículos
+                                {% elif item.id_categoria ==  3%}
+                                    Equipamentos de Proteção
+                                {%else%}
+                                    Informática
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{item.quantidade}}
+                            </td>
+                            <td>
+                                {{item.descricao}}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a class="botao ancora-botao" href="/inventario" type="button" style="margin-bottom: 20px;">Sair</a>
+        </section>
+    </main>
+</body>
+</html>
