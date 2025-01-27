@@ -1,7 +1,7 @@
 from app import app
 from app import db
 from app.models import Usuario
-from app.services import usuariosServices
+from app.services import usuariosServices, itensServices
 from flask import render_template, request, redirect, url_for, session, flash
 import bcrypt
 
@@ -188,7 +188,6 @@ def editar_funcionario():
         return redirect(url_for('editar_funcionario'))
 
 
-
 @app.route('/inventario', methods = ['GET'])
 def inventario():
     if not session:
@@ -201,3 +200,29 @@ def inventario():
     }
 
     return render_template('iventario/modulo_inventario.html', context=context)
+
+@app.route('/inventario/registrar', methods = ['GET', 'POST'])
+def registrar_item():
+    if not session:
+        return redirect(url_for('tela_login'))
+    if request.method == 'GET':
+        return render_template('iventario/registrar_item.html')
+    if request.method == 'POST':
+        if request.form.get('nome-item') == '':
+            flash('Digite algum nome para o item.', 'erro')
+            return redirect(url_for('registrar_item'))
+        if request.form.get('quantidade-item') == '':
+            flash('Informe alguma quantidade para o item.', 'erro')
+            return redirect(url_for('registrar_item'))
+        quantidade_item = int(request.form.get('quantidade-item'))
+        
+        try:
+            itensServices.registrar_item(request.form.get('nome-item'),
+                                        request.form.get('categoria-item'),
+                                        request.form.get('descricao-item'),
+                                        quantidade_item)
+            flash('Item cadastrado com sucesso!', 'sucesso')
+            return redirect(url_for('registrar_item'))
+        except Exception as e:
+            flash(f'Erro ao cadastrar item: {str(e)}', 'erro')
+            return redirect(url_for('registrar_item'))

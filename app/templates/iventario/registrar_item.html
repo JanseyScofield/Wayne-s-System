@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-Br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Registrar Item</title>
+</head>
+<body>
+    <nav>
+        <h1 class="titulos-principais">Registrar Funcionário</h1>
+    </nav>
+    <main class="main-form">
+        <form action="/inventario/registrar" class="formulario-padrao" method="POST">
+            <section class="campos-form">
+                <div class="campo-form-padrao">
+                    <label for="nome-item">Digite o nome do item:</label>
+                    <input type="text" name="nome-item" id="nome-item">
+                </div>
+                <div class="campo-form-padrao">
+                    <label for="funcao-funcionario">Escolha a categoria do item:</label>
+                    <select name="categoria-item" id="dropdown-item">
+                        <option value="insumos-quimicos">Insumos Químicos</option>
+                        <option value="veiculos">Veículos</option>
+                        <option value="equipamento-protecao">Equipamentos de Proteção</option>
+                        <option value="informatica">Informática</option>
+                    </select>
+                </div>
+                <div class="campo-form-padrao">
+                    <label for="quantidade-item">Informe a quantidade do item:</label>
+                    <input type="number" name="quantidade-item" min="1">
+                </div>
+                <div class="campo-form-padrao">
+                    <label for="descricao-item">Informe a Descricão do Item (opcional):</label>
+                    <input type="text" name="descricao-item" id="descricao-item">
+                </div>  
+        </section>
+            <div class="botoes-formulario">
+                <button type="submit" class="botao">Cadastrar</button>
+                <a class="botao ancora-botao" href="/inventario" type="button" hr>Sair</a>
+            </div>
+        </form> 
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'erro'%}
+                        <script>
+                            Swal.fire({
+                                title: 'Erro ao cadastrar o item!',
+                                text: '{{ message }}',
+                                icon: 'error',  // Ícone de erro
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#9B1C1C', // Cor do botão
+                                background: '#1B3A5F',        // Cor de fundo do modal
+                                color: '#A1A1A1', 
+                            });
+                        </script>
+                    {% endif %}
+                    {% if category == 'sucesso'%}
+                        <script>
+                            Swal.fire({
+                                title: 'Item Cadastrado com Sucesso!',
+                                text: '{{ message }}',
+                                icon: 'success',  // Ícone de erro
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#198754', // Cor do botão
+                                background: '#1B3A5F',        // Cor de fundo do modal
+                                color: '#A1A1A1', 
+                            });
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </main>
+</body>
+</html>

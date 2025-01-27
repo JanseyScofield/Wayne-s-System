@@ -14,12 +14,12 @@
         <section id="secao-registrar-empregado">
             <img class="imagem-padrao imagem-icone" src="../../static/assets/images/icone-registrar-item.webp" alt="Ícone perfil">
             {%if context.permisao_registrar == 1%}
-                <a class="botao ancora-botao" href="/iventario/registrar">Registrar Item</a>
+                <a class="botao ancora-botao" href="/inventario/registrar">Registrar Item</a>
             {%endif%}
         </section>
         <section class="funcionalidades-modulos">
             <div class="linha-funcionalidade-modulos">
-                <a href="/iventario/visualizar">Dashboard</a>
+                <a href="/inventario/visualizar">Dashboard</a>
                 <p>></p>
             </div>
             {%if context.permisao_editar == 1%}
@@ -30,7 +30,7 @@
             {%endif%}
             {%if context.permisao_deletar == 1%}
                 <div class="linha-funcionalidade-modulos">
-                    <a href="/iventario/apagar">Remover Item</a>
+                    <a href="/inventario/apagar">Remover Item</a>
                     <p>></p>
                 </div>
             {%endif%}
