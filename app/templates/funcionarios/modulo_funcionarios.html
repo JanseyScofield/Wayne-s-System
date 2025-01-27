@@ -10,26 +10,26 @@
     <nav>
         <h1 class="titulos-principais">Funcionários</h1>
     </nav>
-    <main id="main-funcionarios">
+    <main class="main-modulos">
         <section id="secao-registrar-empregado">
             <img class="imagem-padrao imagem-icone" src="../static/assets/images/icone-registrar-usuário.jpg" alt="Ícone perfil">
             {%if context.permisao_registrar == 1%}
                 <a class="botao ancora-botao" href="/funcionarios/registrar">Registrar Funcionário</a>
             {%endif%}
         </section>
-        <section id="funcionalidades-empregados">
-            <div class="linha-funcionalidade-funcionarios">
+        <section class="funcionalidades-modulos">
+            <div class="linha-funcionalidade-modulos">
                 <a href="/funcionarios/visualizar">Dashboard</a>
                 <p>></p>
             </div>
             {%if context.permisao_editar == 1%}
-                <div class="linha-funcionalidade-funcionarios">
+                <div class="linha-funcionalidade-modulos">
                     <a href="#">Editar Funcionário</a>
                     <p>></p>
                 </div>
             {%endif%}
             {%if context.permisao_deletar == 1%}
-                <div class="linha-funcionalidade-funcionarios">
+                <div class="linha-funcionalidade-modulos">
                     <a href="/funcionarios/apagar">Remover Funcionário</a>
                     <p>></p>
                 </div>

@@ -4,14 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/style.css">
-    <title>Funcionários</title>
+    <title>Inventário</title>
 </head>
 <body>   
     <nav>
         <h1 class="titulos-principais">Inventário</h1>
     </nav>
-    <main>
-       
+    <main class="main-modulos">
+        <section id="secao-registrar-empregado">
+            <img class="imagem-padrao imagem-icone" src="../../static/assets/images/icone-registrar-item.webp" alt="Ícone perfil">
+            {%if context.permisao_registrar == 1%}
+                <a class="botao ancora-botao" href="/iventario/registrar">Registrar Item</a>
+            {%endif%}
+        </section>
+        <section class="funcionalidades-modulos">
+            <div class="linha-funcionalidade-modulos">
+                <a href="/iventario/visualizar">Dashboard</a>
+                <p>></p>
+            </div>
+            {%if context.permisao_editar == 1%}
+                <div class="linha-funcionalidade-modulos">
+                    <a href="#">Editar Item</a>
+                    <p>></p>
+                </div>
+            {%endif%}
+            {%if context.permisao_deletar == 1%}
+                <div class="linha-funcionalidade-modulos">
+                    <a href="/iventario/apagar">Remover Item</a>
+                    <p>></p>
+                </div>
+            {%endif%}
+            <a class="botao ancora-botao" href="/home" type="button" hr>Sair</a>
+        </section>
     </main>  
 </body>
 </html>

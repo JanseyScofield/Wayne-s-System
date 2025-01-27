@@ -198,7 +198,7 @@ nav{
     max-height: 15rem;
 }
 
-#main-funcionarios{
+.main-modulos{
     display: flex;
     justify-content: space-around;
 }
@@ -209,7 +209,7 @@ nav{
     align-items: center;
 }
 
-#funcionalidades-empregados{
+.funcionalidades-modulos{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -220,7 +220,7 @@ nav{
     margin-top: -50px;
 }
 
-.linha-funcionalidade-funcionarios{
+.linha-funcionalidade-modulos{
     display: flex;
     justify-content: space-between;
     padding-right: 1rem;
@@ -234,11 +234,11 @@ nav{
     transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
-.linha-funcionalidade-funcionarios a{
+.linha-funcionalidade-modulos a{
     color:var(--cinza-100);
     text-decoration: none;
 }
-.linha-funcionalidade-funcionarios:hover{
+.linha-funcionalidade-modulos:hover{
     transform: scale(1.01);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
