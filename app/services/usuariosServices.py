@@ -2,7 +2,7 @@ from app.models import db, Usuario
 import bcrypt
 from random import randint
 
-def checar_funcao(funcao : int):
+def checar_funcao(funcao : str):
     if funcao == 'administrador-seguranca':
         return 2
     elif funcao == 'gerente':
@@ -51,7 +51,9 @@ def cadastrar_usuario(nome : str, nome_usuario : str, funcao : str, senha_gerada
         print(str(e))
         return f"Erro ao cadastrar usuário: {str(e)}"
     
-def atualizar_usuario(usuario : Usuario, funcao : str, permisao_cadastrar : int, permisao_editar : int, permisao_deletar : int):
+def atualizar_usuario(usuario_nome : str, funcao : str, permisao_cadastrar : int, permisao_editar : int, permisao_deletar : int):
+    usuario = buscar_usuario_nome(usuario_nome)
+
     try:
         usuario.id_funcao = checar_funcao(funcao)
         usuario.permisao_registrar = permisao_cadastrar

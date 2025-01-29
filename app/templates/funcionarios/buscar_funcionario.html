@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <title>Buscar Funcionário</title>
+</head>
+<body>
+    <nav>
+        <h1 class="titulos-principais">Buscar Funcionário</h1>
+    </nav>
+    <main>
+        <section class="container-buscar">
+            <form action="/funcionarios/buscar" class="formulario-padrao" style='margin-bottom: 20px;' method="POST">
+                <section class="campos-form">
+                    <div class="campo-form-padrao">
+                        <label for="nome-funcionario">Digite o nome do funcionário:</label>
+                        <input type="text" name="nome-funcionario" id="nome-funcionario">
+                    </div> 
+                </section>
+                <div class="botoes-formulario">
+                    <button type="submit" class="botao">Buscar</button>
+                    <a class="botao ancora-botao" href="/funcionarios" type="button" hr>Sair</a>
+                </div>
+            </form>
+        </section>
+    </main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'erro'%}
+                        <script>
+                            Swal.fire({
+                                title: 'Erro!',
+                                text: '{{ message }}',
+                                icon: 'error',  // Ícone de erro
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#9B1C1C', // Cor do botão
+                                background: '#1B3A5F',        // Cor de fundo do modal
+                                color: '#A1A1A1', 
+                            });
+                        </script>
+                    {% endif %}
+                    {% if category == 'sucesso'%}
+                        <script>
+                            Swal.fire({
+                                title: '{{ message }}',
+                                icon: 'success',  // Ícone de erro
+                                confirmButtonText: 'Ok',
+                                confirmButtonColor: '#198754', // Cor do botão
+                                background: '#1B3A5F',        // Cor de fundo do modal
+                                color: '#A1A1A1', 
+                            });
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+</body>
+</html>

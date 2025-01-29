@@ -368,6 +368,13 @@ th, td{
     margin-bottom: 5px;
 }
 
+.container-buscar{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .container-editar{
     display: flex;
     flex-direction: column;

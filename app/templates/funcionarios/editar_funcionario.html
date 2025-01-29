@@ -13,22 +13,10 @@
     </nav>
     <main>
         <section class="container-editar">
-            <form action="/funcionarios/buscar" class="formulario-padrao" style='margin-bottom: 20px;' method="POST">
-                <section class="campos-form">
-                    <div class="campo-form-padrao">
-                        <label for="nome-funcionario">Digite o nome do funcionário:</label>
-                        <input type="text" name="nome-funcionario" id="nome-funcionario">
-                    </div> 
-                </section>
-                <div class="botoes-formulario">
-                    <button type="submit" class="botao">Buscar</button>
-                    <a class="botao ancora-botao" href="/funcionarios" type="button" hr>Sair</a>
-                </div>
-            </form> 
             {% if funcionario %}
             <p class="textos-tabelas" style="color: #A1A1A1; margin-bottom: 10px;">Editar os dados de {{funcionario.nome}}</p>
             <form action="/funcionarios/editar" class="formulario-padrao" method="POST">
-                    <input type="hidden" name="funcionario-id" value="{{ funcionario.id }}">
+                    <input type="hidden" name="funcionario" value="{{ funcionario.nome }}">
                         <div class="campo-form-padrao">
                             <label for="funcao-funcionario">Escolha a nova função do funcionário:</label>
                             <select name="funcao-funcionario" id="dropdown-funcionario">
@@ -56,10 +44,11 @@
                         </div>
                         <div class="botoes-formulario">
                             <button type="submit" class="botao">Editar</button>
-                            <a class="botao ancora-botao" href="/funcionarios" type="button" hr>Sair</a>
+                        {% endif %}
+                            <a class="botao ancora-botao" href="/funcionarios/buscar" type="button" hr>Sair</a>
                         </div>
                 </form> 
-            {% endif %}
+            
         </section>
     </main>
     {% with messages = get_flashed_messages(with_categories=true) %}

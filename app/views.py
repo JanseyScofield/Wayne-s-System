@@ -148,7 +148,7 @@ def buscar_funcionario():
     if not session:
         return redirect(url_for('tela_login'))
     if request.method ==  'GET':
-        return render_template('funcionarios/editar_funcionario.html')
+        return render_template('funcionarios/buscar_funcionario.html')
     nome_funcionario = request.form.get('nome-funcionario')
     if not nome_funcionario:
         flash('Por favor, digite o nome do funcionário.', 'erro')
@@ -164,11 +164,10 @@ def buscar_funcionario():
 
 @app.route('/funcionarios/editar', methods=['POST'])
 def editar_funcionario():
-    funcionario_id = request.form.get('funcionario-id')
-    if not funcionario_id:
-        flash('Erro ao identificar o funcionário.', 'erro')
-        return redirect(url_for('editar_funcionario'))
-    
+    if not session:
+        return redirect(url_for('tela_login'))
+
+    funcionario_nome = request.form.get('funcionario')
     funcao_funcionario = request.form.get('funcao-funcionario')
     permisao_registrar = 1 if request.form.get('permisao-registrar') else 0
     permisao_editar = 1 if request.form.get('permisao-editar') else 0
@@ -176,17 +175,17 @@ def editar_funcionario():
 
     try:
         usuariosServices.atualizar_usuario(
-            funcionario_id,
+            funcionario_nome,
             funcao_funcionario,
             permisao_registrar,
             permisao_editar,
             permisao_deletar
         )
         flash('Funcionário editado com sucesso!', 'sucesso')
-        return redirect(url_for('editar_funcionario'))
+        return redirect(url_for('buscar_funcionario'))
     except Exception as e:
         flash(f'Erro ao atualizar funcionário: {str(e)}', 'erro')
-        return redirect(url_for('editar_funcionario'))
+        return redirect(url_for('buscar_funcionario'))
 
 # Fim região funcionários
 
