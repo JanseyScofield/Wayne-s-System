@@ -9,9 +9,8 @@ import bcrypt
 def tela_login():
     erro = None
     session.clear()
-    # Usuario mestre atual codespace: jansey.scofield  senha: @Janseyadministrador-seguranca696
-    # Usuario mestre atual local: jansey.scofield  senha: @Janseyadministrador-seguranca298
-
+    # Usuario mestre atual para realizar testes: bruce.wayne senha : @Bruceadministrador-seguranca571
+    
     if request.method == 'POST':
         usuario = usuariosServices.buscar_usuario_nome_usuario(request.form.get('usuario'))
         if usuario:
