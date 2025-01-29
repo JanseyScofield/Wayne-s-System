@@ -35,3 +35,16 @@ def apagar_item(item : Item):
     except Exception as e:
         db.session.rollback()
         return f"Erro ao apagar item: {str(e)}"
+    
+def atualizar_item(item_id : int, categoria : str, quantidade : int, descricao : str):
+    item = buscar_item_id(item_id)
+
+    try:
+        item.id_categoria = checar_categoria_item(categoria)
+        item.quantidade = quantidade
+        item.descricao = descricao
+        db.session.commit() 
+    except Exception as e:
+        db.session.rollback()
+        print(str(e))
+        return f"Erro ao atualizar o item: {str(e)}"

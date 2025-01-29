@@ -263,3 +263,45 @@ def remover_item():
             flash('Item não encontrado. Digite outro código.', 'erro')
             return redirect(url_for('remover_item'))
         
+@app.route('/inventario/buscar', methods=['GET','POST'])
+def buscar_item():
+    if not session:
+        return redirect(url_for('tela_login'))
+    if request.method ==  'GET':
+        return render_template('inventario/buscar_item.html')
+    codigo_item = request.form.get('codigo-item')
+    if not codigo_item:
+        flash('Por favor, digite o código do item.', 'erro')
+        return redirect(url_for('buscar_item'))
+
+    item = itensServices.buscar_item_id(int(codigo_item))
+    if item:
+        return render_template('inventario/editar_item.html', item=item)
+    else:
+        flash('Item não encontrado. Digite outro código.', 'erro')
+        return redirect(url_for('buscar_item'))
+    
+@app.route('/inventario/editar', methods=['POST'])
+def editar_item():
+    if not session:
+        return redirect(url_for('tela_login'))
+
+    codigo_item = int(request.form.get('item'))
+    categoria = request.form.get('categoria-item')
+    quantidade = request.form.get('quantidade-item')
+    descricao = request.form.get('descricao-item')
+
+    try:
+        itensServices.atualizar_item(
+            codigo_item,
+            categoria,
+            quantidade,
+            descricao,
+        )
+        flash('Item editado com sucesso!', 'sucesso')
+        return redirect(url_for('buscar_item'))
+    except Exception as e:
+        flash(f'Erro ao atualizar item: {str(e)}', 'erro')
+        return redirect(url_for('buscar_item'))
+    
+#Fim região endpoints inventário

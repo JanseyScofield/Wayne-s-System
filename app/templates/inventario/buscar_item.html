@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../static/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>Apagar Item</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+    <title>Buscar Item</title>
 </head>
 <body>
     <nav>
-        <h1 class="titulos-principais">Deletar Item</h1>
+        <h1 class="titulos-principais">Buscar Item</h1>
     </nav>
     <main>
-        <section class="container-apagar">
-            <form action="/inventario/apagar" class="formulario-padrao" method="POST">
+        <section class="container-buscar">
+            <form action="/inventario/buscar" class="formulario-padrao" style='margin-bottom: 20px;' method="POST">
                 <section class="campos-form">
                     <div class="campo-form-padrao">
-                        <label for="codigo-item">Digite o código do item que deseja apagar:</label>
+                        <label for="codigo-item">Digite o código do item que deseja editar:</label>
                         <input type="number" name="codigo-item" id="codigo-item" min="1">
                     </div> 
                 </section>
                 <div class="botoes-formulario">
-                    <button type="submit" class="botao">Apagar</button>
+                    <button type="submit" class="botao">Buscar</button>
                     <a class="botao ancora-botao" href="/inventario" type="button" hr>Sair</a>
                 </div>
             </form>
